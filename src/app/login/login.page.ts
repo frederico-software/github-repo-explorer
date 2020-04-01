@@ -19,8 +19,6 @@ import { AlertController, LoadingController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   private username = '';
-  private repositoryData = [];
-  private staredRepositoryData = [];
   private loading = null;
 
   constructor(
@@ -30,9 +28,7 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   async presentLoading(messageText) {
     let text = '';
@@ -46,10 +42,8 @@ export class LoginPage implements OnInit {
       message: text,
       duration: 2000
     });
-    await this.loading.present();
 
-    const { role, data } = await this.loading.onDidDismiss();
-    console.log('Loading dismissed!');
+    await this.loading.present();
   }
 
   async stopLoading() {
@@ -76,22 +70,22 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    const self = this;
     this.presentLoading(null);
     // Limpamos o sessionStorage para garantir que os dados sejam recentes
     sessionStorage.clear();
     // Todas as chamadas de endpoint são feitas aqui em um único lugar.
     // Isso evita a sobrecarga do servidor que disponibiliza os dados
-    this.githubAPIService.getRepositoryInfo(this.username).then(data => {
-      self.repositoryData = data;
+    this.githubAPIService.getRepositories(this.username).then(data => {
       sessionStorage.setItem('items', JSON.stringify(data)); // Dados são serializados como string e armazenados em sessionStorage 
 
       this.githubAPIService.getStaredRepositories(this.username).then(staredData => {
-        this.staredRepositoryData = staredData;
-        sessionStorage.setItem('staredItems', JSON.stringify(staredData));
-        this.stopLoading();
-        this.router.navigate(['/tabs/tab1']);
+
+        sessionStorage.setItem('staredItems', JSON.stringify(staredData)); // Guarda informações
+        this.stopLoading(); // Esconde o loader
+        this.router.navigate(['/tabs/tab1']); // Redireciona para a tela de abas
+
       });
+      
     });
   }
 

@@ -21,7 +21,7 @@ export class GithubAPIService {
   /*
   * Obtém informações sobre os repositórios de determinado usuário
   */
-  getRepositoryInfo(userName) {
+  getRepositories(userName) {
     this.githubUsername = userName;
     return fetch(`https://api.github.com/users/${userName}/repos`).then(response => response.json());
   }
