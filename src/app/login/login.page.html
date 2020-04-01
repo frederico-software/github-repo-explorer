@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Github Repo Explorer</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <ion-card>
+          <img class="github-image" src="assets/icon/Octocat.png" />
+          <ion-card-content class="form-item">
+            <ion-label class="input-item">Digite um nome de usuário do Github:</ion-label>
+            <ion-input class="input-item" [(ngModel)]="username" placeholder="Nome de usuário do Github"></ion-input>
+            <ion-button class="input-item" expand="full" (click)="doLogin()">Login</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>
