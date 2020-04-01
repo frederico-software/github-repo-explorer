@@ -18,3 +18,5 @@ $ ionic serve
 ```
   - A aplicação abrirá em uma aba do navegador padrão. É recomendado utilizar o Google Chrome para que a aplicação funcione corretamente.
   - Também é possível compilar um Aplicativo Mobile para Android ou iOS a partir do mesmo código-fonte.
+
+![Login](https://i.imgur.com/7yL9dBb.jpg) ![Tela principal](https://i.imgur.com/S9aTVCO.jpg)
