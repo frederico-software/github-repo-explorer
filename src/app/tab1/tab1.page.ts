@@ -5,7 +5,6 @@
 */
 
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -15,7 +14,7 @@ import { Router } from '@angular/router';
 export class Tab1Page {
   private items = [];
 
-  constructor(private router: Router) {
+  constructor() {
     // Obtém as informações sobre os repositórios armazenadas localmente em sessionStorage
     try {
       this.items = JSON.parse(sessionStorage.getItem('items'));

@@ -67,6 +67,9 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
+  /*
+  * Esse método efetua o processo de login, fazendo chamada para os endpoints e obtendo dados
+  */
   doLogin() {
     if (!this.username || this.username === '') {
       this.showErrorAlert('Digite um nome de usuário do Github!');
@@ -75,14 +78,17 @@ export class LoginPage implements OnInit {
 
     const self = this;
     this.presentLoading(null);
+    // Limpamos o sessionStorage para garantir que os dados sejam recentes
     sessionStorage.clear();
+    // Todas as chamadas de endpoint são feitas aqui em um único lugar.
+    // Isso evita a sobrecarga do servidor que disponibiliza os dados
     this.githubAPIService.getRepositoryInfo(this.username).then(data => {
       self.repositoryData = data;
-      sessionStorage.setItem('items', JSON.stringify(data));
+      sessionStorage.setItem('items', JSON.stringify(data)); // Dados são serializados como string e armazenados em sessionStorage 
 
-      this.githubAPIService.getStarredRepositories(this.username).then(data => {
-        this.staredRepositoryData = data;
-        sessionStorage.setItem('staredItems', JSON.stringify(data));
+      this.githubAPIService.getStaredRepositories(this.username).then(staredData => {
+        this.staredRepositoryData = staredData;
+        sessionStorage.setItem('staredItems', JSON.stringify(staredData));
         this.stopLoading();
         this.router.navigate(['/tabs/tab1']);
       });
