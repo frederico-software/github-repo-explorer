@@ -4,7 +4,7 @@
 * Contato: frederico.software (at) gmail (dot) com
 */
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { GithubAPIService } from '../github-api.service';
 import { AlertController, LoadingController } from '@ionic/angular';
 
@@ -70,7 +70,7 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    this.presentLoading(null);
+    this.presentLoading(null); // Exibe o loader
     // Limpamos o sessionStorage para garantir que os dados sejam recentes
     sessionStorage.clear();
     // Todas as chamadas de endpoint são feitas aqui em um único lugar.
@@ -84,8 +84,12 @@ export class LoginPage implements OnInit {
         this.stopLoading(); // Esconde o loader
         this.router.navigate(['/tabs/tab1']); // Redireciona para a tela de abas
 
+      }).catch(() => {
+        this.showErrorAlert('Não foi possível obter dados. Verifique sua conexão com a Internet.');
       });
-      
+
+    }).catch(() => {
+      this.showErrorAlert('Não foi possível obter dados. Verifique sua conexão com a Internet.');
     });
   }
 
